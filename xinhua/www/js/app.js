@@ -22,18 +22,18 @@ angular.module('starter', ['ionic'])
     }
   });
 })
-        .config(function($stateProvider,$urlRouterProvider){
+        .config(function($stateProvider,$urlRouterProvider,$ionicConfigProvider){
             $stateProvider
             .state('tab',{
             url:'/tabs',
             abstract:true,
-            templateUrl:'tamplate/tabs.html'
+            templateUrl:'template/tabs.html'
           })
             .state('tab.my',{
             url:'/my',
               views:{
                 'myView':{
-                 template:'tamplate/my.html'
+                 templateUrl:'template/my.html'
                 }    
               }
            })
@@ -41,7 +41,7 @@ angular.module('starter', ['ionic'])
             url:'/course',
               views:{
                 'courseView':{
-                 template:'tamplate/course.html'
+                 templateUrl:'template/course.html'
                 }    
               }
            })
@@ -49,7 +49,7 @@ angular.module('starter', ['ionic'])
             url:'/community',
               views:{
                 'communityView':{
-                 template:'tamplate/community.html'
+                 templateUrl:'template/community.html'
                 }    
               }
            })
@@ -61,5 +61,15 @@ angular.module('starter', ['ionic'])
                 url:'/reg',
                 templateUrl:'template/reg.html'
            })
+           $ionicConfigProvider.tabs.position("bottom");
            $urlRouterProvider.otherwise('/enter');
-        });
+        })
+        .controller('imageCtrl',function($scope,$interval){
+           $scope.i=1;
+           $interval(function(){
+               $scope.i=$scope.i+1;
+               if($scope.i==4){
+                   $scope.i=1;
+               }
+            },2000);
+        })
