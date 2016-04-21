@@ -1,5 +1,32 @@
 <view>
+    <ion-header-bar class="bar-positive" align-title="center">
+        <i class="title">设置</i>
+    </ion-header-bar>
     <ion-content>
-        我的
+        <ul class="list">
+                <li class="item item-toggle">
+                    检查更新
+                    <label class="toggle toggle-balanced">
+                      <input type="checkbox">
+                      <div class="track">
+                        <div class="handle"></div>
+                      </div>
+                    </label>
+                </li>
+                <li class="item">
+                    <div style="display:inline;padding-right:70% ">当前版本:</div>
+                    <div style="display:inline; ">1.0</div>
+                </li>
+                <li class="item">
+                    <h2>
+                        设置
+                    </h2>
+                </li>
+                <li class="item item-avatar-right">
+                    <img src="img/avatar.png">                  
+                    <h2>个人资料</h2>               
+                </li>
+        </ul>
+        <button class="button button-balanced button-full" ui-sref="enter">退出登录</button>
     </ion-content>
 </view>

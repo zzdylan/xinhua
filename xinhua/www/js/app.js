@@ -61,6 +61,10 @@ angular.module('starter', ['ionic'])
                 url:'/reg',
                 templateUrl:'template/reg.html'
            })
+           .state('newhtml',{
+                url:'/newhtml',
+                templateUrl:'template/newhtml.html'
+           })
            $ionicConfigProvider.tabs.position("bottom");
            $urlRouterProvider.otherwise('/enter');
         })
@@ -73,3 +77,5 @@ angular.module('starter', ['ionic'])
                }
             },2000);
         })
+
+        
