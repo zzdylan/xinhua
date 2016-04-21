@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
+angular.module('starter', ['ionic','starter.controller'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -33,7 +33,8 @@ angular.module('starter', ['ionic'])
             url:'/my',
               views:{
                 'myView':{
-                 templateUrl:'template/my.html'
+                 templateUrl:'template/my.html',
+                 controller:'menuCtrl'
                 }    
               }
            })
@@ -41,7 +42,8 @@ angular.module('starter', ['ionic'])
             url:'/course',
               views:{
                 'courseView':{
-                 templateUrl:'template/course.html'
+                 templateUrl:'template/course.html',
+                 controller:'imageCtrl'
                 }    
               }
            })
@@ -49,7 +51,8 @@ angular.module('starter', ['ionic'])
             url:'/community',
               views:{
                 'communityView':{
-                 templateUrl:'template/community.html'
+                 templateUrl:'template/community.html',
+                 controller:'menuCtrl'
                 }    
               }
            })
@@ -61,10 +64,7 @@ angular.module('starter', ['ionic'])
                 url:'/reg',
                 templateUrl:'template/reg.html'
            })
-           .state('newhtml',{
-                url:'/newhtml',
-                templateUrl:'template/newhtml.html'
-           })
+
            $ionicConfigProvider.tabs.position("bottom");
            $urlRouterProvider.otherwise('/enter');
         })
@@ -77,5 +77,4 @@ angular.module('starter', ['ionic'])
                }
             },2000);
         })
-
-        
+   

@@ -1,5 +1,7 @@
 <view>
-    <ion-header-bar class="bar-positive" align-title="center">
+  <ion-side-menus>
+    <ion-side-menu-content>
+        <ion-header-bar class="bar-positive" align-title="center">
         <i class="title">设置</i>
     </ion-header-bar>
     <ion-content>
@@ -23,10 +25,22 @@
                     </h2>
                 </li>
                 <li class="item item-avatar-right">
-                    <img src="img/avatar.png">                  
+                    <img src="img/avatar.png" ng-click="toggleLeftSideMenu()">                  
                     <h2>个人资料</h2>               
                 </li>
         </ul>
         <button class="button button-balanced button-full" ui-sref="enter">退出登录</button>
     </ion-content>
+
+    </ion-side-menu-content>
+    <ion-side-menu side="left" class="energized-bg">
+        <ion-list>
+            <ion-item class="item-avatar-left stable-bg">
+                <img src="../img/avatar.png">               
+                    人生若只如初见&nbsp;&nbsp;&nbsp;&nbsp;
+                    <i class="icon ion-qr-scanner" ng-click="camera()"></i>               
+            </ion-item>
+        </ion-list>
+    </ion-side-menu>
+  </ion-side-menus>
 </view>
