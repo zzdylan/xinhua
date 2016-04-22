@@ -6,18 +6,9 @@
     </ion-header-bar>
     <ion-content>
         <ul class="list">
-                <li class="item item-toggle">
-                    检查更新
-                    <label class="toggle toggle-balanced">
-                      <input type="checkbox">
-                      <div class="track">
-                        <div class="handle"></div>
-                      </div>
-                    </label>
-                </li>
                 <li class="item">
-                    <div style="display:inline;padding-right:70% ">当前版本:</div>
-                    <div style="display:inline; ">1.0</div>
+                    <div style="display:inline ">当前版本:</div>
+                    <div style="display:inline;padding-left:65%">{{user}}</div>
                 </li>
                 <li class="item">
                     <h2>
@@ -28,6 +19,13 @@
                     <img src="img/avatar.png" ng-click="toggleLeftSideMenu()">                  
                     <h2>个人资料</h2>               
                 </li>
+                <li class="item">
+                    <button class="button button-energized button-block" ng-click="refresh()">查看最新版本:</button>
+                    <div style="display:inline;padding-left: 50%">{{appVersion}}</div>
+                </li>
+                <li>
+                    {{downloadProgress}}
+                </li>
         </ul>
         <button class="button button-balanced button-full" ui-sref="enter">退出登录</button>
     </ion-content>
@@ -36,9 +34,9 @@
     <ion-side-menu side="left" class="energized-bg">
         <ion-list>
             <ion-item class="item-avatar-left stable-bg">
-                <img src="../img/avatar.png">               
+                <img src="img/avatar.png">               
                     人生若只如初见&nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="icon ion-qr-scanner" ng-click="camera()"></i>               
+                    <i class="icon ion-qr-scanner" ng-click="takePhoto()"></i>               
             </ion-item>
         </ion-list>
     </ion-side-menu>

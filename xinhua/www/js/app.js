@@ -34,7 +34,7 @@ angular.module('starter', ['ionic','starter.controller'])
               views:{
                 'myView':{
                  templateUrl:'template/my.html',
-                 controller:'menuCtrl'
+                 controller:'versionCtrl'
                 }    
               }
            })
@@ -58,7 +58,7 @@ angular.module('starter', ['ionic','starter.controller'])
            })
             .state('enter',{
                 url:'/enter',
-                templateUrl:'template/enter.html'
+                templateUrl:'template/enter.html',
            })
            .state('reg',{
                 url:'/reg',
