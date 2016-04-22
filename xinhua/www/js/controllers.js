@@ -43,10 +43,10 @@ angular.module('starter.controller',['ngCordova'])
         
     
         .controller('versionCtrl',function($scope,$cordovaFileTransfer,$cordovaFile,$http,$ionicPopup,$timeout,$cordovaProgress){
-            $scope.user='1.1';
+            $scope.user='1.0';
             $scope.refresh=function(){ 
-                showBar(true, 50000);
-                $http.get('http://zz520.nat123.net/go.json')
+                $cordovaProgress.showBar(true, 50000);
+                $http.get('http://zz527844046.kpyun-1.cc/go.json')
                     .success(function(data) {
                        
                         $scope.nowVersion=data.appVersion;
@@ -58,7 +58,7 @@ angular.module('starter.controller',['ngCordova'])
                                 });
                                 confirmPopup.then(function(res) {
                                   if(res) {
-                                            var url = "http://zz520.nat123.net/xinhua1.1.png";
+                                            var url = "http://zz527844046.kpyun-1.cc/xinhua1.1.apk";
                                             var targetPath = cordova.file.externalRootDirectory+'阿震做的app/' + "xinhua1.1.png";
                                             var trustHosts = true;
                                             var options = {};
