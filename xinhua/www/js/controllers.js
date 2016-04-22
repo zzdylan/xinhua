@@ -44,10 +44,8 @@ angular.module('starter.controller',['ngCordova'])
     
         .controller('versionCtrl',function($scope,$cordovaFileTransfer,$cordovaFile,$http,$ionicPopup,$timeout,$cordovaProgress){
             $scope.user='1.1';
-            $scope.test=function(){
-                showBar(true, 50000);
-            }
             $scope.refresh=function(){ 
+                showBar(true, 50000);
                 $http.get('http://zz520.nat123.net/go.json')
                     .success(function(data) {
                        
