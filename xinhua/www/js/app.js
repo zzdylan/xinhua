@@ -5,8 +5,9 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('starter', ['ionic','starter.controller'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform,$cordovaNativeAudio) {
   $ionicPlatform.ready(function() {
+      
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -62,7 +63,8 @@ angular.module('starter', ['ionic','starter.controller'])
            })
            .state('reg',{
                 url:'/reg',
-                templateUrl:'template/reg.html'
+                templateUrl:'template/reg.html',
+                controller:'regCtrl'
            })
 
            $ionicConfigProvider.tabs.position("bottom");

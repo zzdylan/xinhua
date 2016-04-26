@@ -1,21 +1,40 @@
 <view>
     <ion-header-bar class="bar-stable" align-title="center">
         <div class="icon ion-chevron-left" style="width: 10%;text-align: center;padding-top: 2%" ui-sref="enter"></div>
-        <div class="title" style="padding-top: 2%"><h3>邮箱注册</h3></div>
+        <div class="title" style="padding-top: 2%"><h3>账号注册</h3></div>
     </ion-header-bar>
-    <ion-content style="background-color: #f0f0f2">
-        <div class="item-input" style="background-color:#ffffff;">
-                <span class="input-label" ><h4>账号:</h4></span>
-                <input placeholder="请输入账号" type="text" >
+    <ion-content style="background-color: #f0f0f2">     
+        <form name="myForm" ng-submit="reg()">
+            <div class="item-input" style="background-color:#ffffff;">
+                    <span class="input-label" ><h4>账号:</h4></span>
+                    <input placeholder="请输入账号" type="text" ng-model="user.name" ng-minlength="3" ng-maxlength="11" name="username" required>
+                   
+            </div>
+
+            <div class="item-input" style="background-color:#ffffff;margin-top: 2px">
+                <span class="input-label" ><h4>密码:</h4></span>
+                <input placeholder="请输入密码" type="password" ng-model="user.password" ng-maxlength="11" ng-minlength="6" name="password" required>
+            </div>
+            <div class="item-input" style="background-color:#ffffff;margin-top: 2px">
+                <span class="input-label" ><h4>确认密码:</h4></span>
+                <input placeholder="请确认密码" type="password" ng-maxlength="11" ng-model="user.passwordr" name="passwordr" required>
+            </div>
+            <button type="submit" class="button button-positive button-full" ng-disabled="myForm.$invalid || user.password!==user.passwordr">注册</button>                
+        </form>
+        <div style="color:red;text-align: center" ng-show="myForm.username.$dirty && myForm.username.$invalid">
+            <span ng-show="myForm.username.$error.required">用户用不能为空</span>
+            <span ng-show="myForm.username.$error.minlength">用户名长度不能小于5</span>
+            <span ng-show="myForm.username.$error.maxlength">用户名长度不能大于11</span>
         </div>
-        <div class="item-input" style="background-color:#ffffff;margin-top: 2px">
-            <span class="input-label" ><h4>密码:</h4></span>
-            <input placeholder="请输入密码" type="password" >
+        <div style="color:red;text-align: center" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+            <span ng-show="myForm.password.$error.required">密码不能为空</span>
+                <span ng-show="myForm.password.$error.maxlength">密码长度不能大于11</span>
+                <span ng-show="myForm.password.$error.minlength">密码名长度不能小于6</span>
         </div>
-        <div class="item-input" style="background-color:#ffffff;margin-top: 2px">
-            <span class="input-label" ><h4>密码:</h4></span>
-            <input placeholder="请确认密码" type="password" >
+        <div style="color:red;text-align: center">
+            <span ng-show="user.password!=user.passwordr">两次密码输入不一致</span>
         </div>
-        <button class="button button-positive button-full" ui-sref="newhtml">注册</button>
+        
+            
     </ion-content>
 </view>

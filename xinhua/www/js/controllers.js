@@ -9,48 +9,49 @@ angular.module('starter.controller',['ngCordova'])
             },2000);
         })
    
-        .controller('menuCtrl',function($scope,$ionicSideMenuDelegate,$cordovaCamera){
-                $scope.toggleLeftSideMenu = function() {
-                    $ionicSideMenuDelegate.toggleLeft();
-                };
-                $scope.takePhoto=function(){
-                   var options = {
-                                                                 //这些参数可能要配合着使用，比如选择了sourcetype是0，destinationtype要相应的设置
-        quality: 100,                                            //相片质量0-100
-        destinationType: Camera.DestinationType.FILE_URI,        //返回类型：DATA_URL= 0，返回作为 base64 編碼字串。 FILE_URI=1，返回影像档的 URI。NATIVE_URI=2，返回图像本机URI (例如，資產庫)
-        sourceType: Camera.PictureSourceType.CAMERA,             //从哪里选择图片：PHOTOLIBRARY=0，相机拍照=1，SAVEDPHOTOALBUM=2。0和1其实都是本地图库
-        allowEdit: false,                                        //在选择之前允许修改截图
-        encodingType:Camera.EncodingType.JPEG,                   //保存的图片格式： JPEG = 0, PNG = 1
-        targetWidth: 200,                                        //照片宽度
-        targetHeight: 200,                                       //照片高度
-        mediaType:0,                                             //可选媒体类型：圖片=0，只允许选择图片將返回指定DestinationType的参数。 視頻格式=1，允许选择视频，最终返回 FILE_URI。ALLMEDIA= 2，允许所有媒体类型的选择。
-        cameraDirection:0,                                       //枪后摄像头类型：Back= 0,Front-facing = 1
-        popoverOptions: CameraPopoverOptions,
-        saveToPhotoAlbum: true                                   //保存进手机相册
-    };
-
-    $cordovaCamera.getPicture(options).then(function(imageData) {
-        CommonJs.AlertPopup(imageData);
-        var image = document.getElementById('myImage');
-        image.src=imageData;
-        //image.src = "data:image/jpeg;base64," + imageData;
-    }, function(err) {
-        // error
-        CommonJs.AlertPopup(err.message);
-    });
-                }
+        .controller('menuCtrl',function($scope,$cordovaCamera){
+                
+               
         })
         
     
-        .controller('versionCtrl',function($scope,$cordovaFileTransfer,$cordovaFile,$http,$ionicPopup,$timeout,$cordovaProgress){
-            $scope.user='1.0';
+        .controller('versionCtrl',function($scope,$cordovaInAppBrowser,$cordovaBarcodeScanner,$cordovaFileTransfer,$ionicSideMenuDelegate,$cordovaFile,$http,$ionicPopup,$timeout,$cordovaSpinnerDialog,$cordovaFileOpener2){
+                                $scope.user='1.2';
+                        $scope.takePhoto=function(){
+                               $cordovaBarcodeScanner
+                                .scan()
+                                .then(function(barcodeData) {
+                                  // Success! Barcode data is here 扫描数据：barcodeData.text
+                                 $scope.scan=barcodeData.text;
+                                alert(angular.toJson(barcodeData));
+                                            var options = {
+                                               location: 'yes',
+                                               clearcache: 'yes',
+                                               toolbar: 'no'
+                                             };
+                                          $cordovaInAppBrowser.open($scope.scan, '_blank', options)
+                                         .then(function(event) {
+                                           // success
+                                         })
+                                         .catch(function(event) {
+                                           // error
+                                         });
+                                }, function(error) {
+                                  // An error occurred
+                                  alert('扫描失败');
+                                });
+       
+
+                        }
+                $scope.toggleLeftSideMenu = function() {
+                    $ionicSideMenuDelegate.toggleLeft();
+                };
             $scope.refresh=function(){ 
-                $cordovaProgress.showBar(true, 50000);
-                $http.get('http://zz527844046.kpyun-1.cc/go.json')
+                $http.get('http://zz527844046.kpyun-1.cc/version.php')
                     .success(function(data) {
                        
                         $scope.nowVersion=data.appVersion;
-                        if($scope.nowVersion!=$scope.user){
+                        if($scope.nowVersion!==$scope.user){
                              
                                 var confirmPopup = $ionicPopup.confirm({
                                   title: '当前最新版本为'+$scope.nowVersion,
@@ -58,22 +59,33 @@ angular.module('starter.controller',['ngCordova'])
                                 });
                                 confirmPopup.then(function(res) {
                                   if(res) {
-                                            var url = "http://zz527844046.kpyun-1.cc/xinhua1.1.apk";
-                                            var targetPath = cordova.file.externalRootDirectory+'阿震做的app/' + "xinhua1.1.png";
+                                            var url = "http://zz527844046.kpyun-1.cc/xinhua1.2.png";
+                                            var targetPath = "/sdcard/阿震做的app/xinhua1.2.apk";
                                             var trustHosts = true;
-                                            var options = {};
+                                            var options = {};      
+                                             $cordovaSpinnerDialog.show("正在下载...","请稍候", true);
                                             $cordovaFileTransfer.download(url, targetPath, options, trustHosts)
                                               .then(function(result) {
                                                 // Success!
                                                     alert('文件下载成功');
+                                                      $cordovaFileOpener2.open(
+                                                        '/sdcard/阿震做的app/xinhua1.2.apk'
+                                                        
+                                                      ).then(function() {
+                                                          // Success!
+                                                      }, function(err) {
+                                                          // An error occurred. Show a message to the user
+  });
                                               }, function(err) {
                                                 // Error
                                                     alert('文件下载失败');
                                               }, function (progress) {
                                                 $timeout(function () {
                                                   $scope.downloadProgress = Math.floor((progress.loaded / progress.total) * 100);
+                                                  if($scope.downloadProgress==100){$cordovaSpinnerDialog.hide();};
                                                 });
                                               });
+                                              
                                   } else {
                                     //不进行下载
                                   }
@@ -84,8 +96,39 @@ angular.module('starter.controller',['ngCordova'])
                             alert('当前版本为'+$scope.nowVersion+'已经是最新版本');
                         }
                 })
-                    .error(function(data) {alert('no');});
+                    .error(function(data) {alert('error');});
                  
-            }
+            };
           
+         })
+               
+        .controller('regCtrl',function($scope,$http){
+            $scope.email="";
+            $scope.username="";
+            $scope.user={name:"",password:"",passwordr:""};
+            $scope.regLink=function(){
+                  $http({method:'POST',url:'http://119.29.223.196/api.php',
+                            data:{username:$scope.user.name,password:$scope.user.password}})
+                                .success(function(res){
+                                   alert('成功');
+                                })
+                                .error(function(res){alert('error');})
+                                          
+            }
+            $scope.regRefresh=function(){
+                $scope.$watch($scope.user.name,function(newVal){
+                    $scope.user.name=newVal;
+                });
+                $scope.$watch($scope.user.password,function(newVal){
+                    $scope.user.password=newVal;
+                });
+                 $scope.$watch($scope.user.passwordr,function(newVal){
+                    $scope.user.passwordr=newVal;
+                });
+              
+            }
+            $scope.reg=function(){
+                $scope.regRefresh();
+                $scope.regLink();
+            }
          })

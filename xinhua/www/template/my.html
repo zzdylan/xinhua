@@ -2,6 +2,7 @@
   <ion-side-menus>
     <ion-side-menu-content>
         <ion-header-bar class="bar-positive" align-title="center">
+            <i class="icon ion-android-menu" style="font-size:25px" ng-click="toggleLeftSideMenu()"></i>    
         <i class="title">设置</i>
     </ion-header-bar>
     <ion-content>
@@ -16,7 +17,7 @@
                     </h2>
                 </li>
                 <li class="item item-avatar-right">
-                    <img src="img/avatar.png" ng-click="toggleLeftSideMenu()">                  
+                    <img src="img/avatar.png">                  
                     <h2>个人资料</h2>               
                 </li>
                 <li class="item">
@@ -32,11 +33,32 @@
 
     </ion-side-menu-content>
     <ion-side-menu side="left" class="energized-bg">
-        <ion-list>
+        <ion-list  >
             <ion-item class="item-avatar-left stable-bg">
                 <img src="img/avatar.png">               
                     人生若只如初见&nbsp;&nbsp;&nbsp;&nbsp;
-                    <i class="icon ion-qr-scanner" ng-click="takePhoto()"></i>               
+                    <i class="icon ion-qr-scanner" ng-click="takePhoto()" ></i>               
+            </ion-item>
+            <ion-item class="energized-bg">
+                <textarea cols="20" rows="5" ng-model="scan"></textarea>
+            </ion-item>
+            <ion-item class="energized-bg">
+                <p>个性装扮</p>
+            </ion-item>
+            <ion-item class="energized-bg">
+                <p>我的收藏</p>
+            </ion-item>
+            <ion-item class="energized-bg">
+                <p>我的相册</p>
+            </ion-item>
+            <ion-item class="energized-bg">
+                <p>我的文件</p>
+            </ion-item>
+             <ion-item class="energized-bg item-thumbnail-right"  >
+                 <img src="img/66.jpg">
+                 <p style="color:#ff0066">背起行囊</p>
+                    <p style="color:#ff0066">寻找远方</p>
+                    <p style="color:#ff0066">你一如既往。</p>   
             </ion-item>
         </ion-list>
     </ion-side-menu>
